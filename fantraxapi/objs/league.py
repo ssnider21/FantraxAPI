@@ -80,7 +80,8 @@ class League:
             key = scoring_date.strftime("%b %d")
             if "0" in key and not key.endswith("0"):
                 key = key.replace("0", "")
-            self.scoring_dates[period_to_day_list[key]] = scoring_date
+            if key in period_to_day_list:
+                self.scoring_dates[period_to_day_list[key]] = scoring_date
         self.scoring_periods = {p["value"]: ScoringPeriod(self, p) for p in responses[3]["displayedLists"]["scoringPeriodList"] if p["name"] != "Full Season"}
         self._scoring_periods_lookup = None
         self._update_teams(responses[3]["fantasyTeams"])
